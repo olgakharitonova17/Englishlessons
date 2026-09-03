@@ -117,10 +117,23 @@ function ToBeTrainer() {
   </section>
 }
 
+function EnglishPracticePack() {
+  return <section className="practice-pack">
+    <div className="trainer-heading"><div><span className="eyebrow">More practice</span><h2>English Practice</h2></div><span className="trainer-badge">5 exercises</span></div>
+    <iframe
+      className="practice-frame"
+      src={`${import.meta.env.BASE_URL}trainers/english-practice-5-exercises.html`}
+      title="English Practice — 5 exercises"
+      loading="lazy"
+      allow="autoplay"
+    />
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const hasToBeTrainer = course.id === 'starlight-4' && module === 'Starter' && lesson === 'Lesson 1'
-  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{hasToBeTrainer && <ToBeTrainer/>}</main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{hasToBeTrainer && <><ToBeTrainer/><EnglishPracticePack/></>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })

@@ -104,6 +104,8 @@ button { color: inherit; }
 .trainer-result strong { display: block; color: #5d53c8; font-size: 30px; }
 .trainer-result p { color: #68738b; margin: 8px 0 24px; }
 .trainer-result button { padding: 0 28px; color: #fff; background: linear-gradient(110deg, #7569df, #e184a9); }
+.practice-pack { padding: 58px 8px 74px; }
+.practice-frame { display: block; width: 100%; height: min(780px, 82vh); min-height: 620px; border: 1px solid #e5e4f1; border-radius: 24px; background: #eef0f8; box-shadow: 0 18px 50px rgba(62,57,112,.1); }
 footer { border-top: 1px solid var(--line); min-height: 105px; display: flex; align-items: center; gap: 9px; color: var(--navy); font-weight: 800; }
 footer .book-logo { width: 28px; height: 25px; }
 footer p { margin-left: auto; color: #96a0b3; font-size: 11px; font-weight: 600; }
@@ -151,6 +153,8 @@ footer p { margin-left: auto; color: #96a0b3; font-size: 11px; font-weight: 600;
   .trainer-answers { gap: 7px; margin-top: 28px; }
   .trainer-controls { grid-template-columns: 1fr 1fr; }
   .trainer-controls .check { grid-column: 1 / -1; grid-row: 1; }
+  .practice-pack { padding: 44px 0 55px; }
+  .practice-frame { min-height: 650px; height: 82vh; border-radius: 18px; }
   footer p { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
