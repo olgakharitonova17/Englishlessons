@@ -24,7 +24,7 @@ button { color: inherit; }
 .open-book { position: absolute; left: 11%; bottom: 5%; transform: rotate(-10deg) scale(1.25); }
 .courses-section, .content-section { padding: 64px 8px 74px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px; }
-.section-heading h2, .homework-card h2 { color: var(--navy); margin: 0; font-size: 31px; letter-spacing: -1px; }
+.section-heading h2 { color: var(--navy); margin: 0; font-size: 31px; letter-spacing: -1px; }
 .section-heading p { color: #8590a8; font-size: 14px; margin: 0 0 5px; }
 .course-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .course-card { background: var(--tone); border-radius: 20px; min-height: 345px; display: flex; flex-direction: column; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
@@ -40,8 +40,8 @@ button { color: inherit; }
 .course-card__body { margin-top: auto; padding: 8px 20px 20px; }
 .course-card__body > span { color: color-mix(in srgb, var(--accent) 75%, #8791a6); font-size: 11px; font-weight: 700; }
 .course-card h3 { color: var(--accent); font-size: 24px; margin: 4px 0 18px; letter-spacing: -.7px; }
-.course-card button, .homework-card button { width: 100%; border: 0; border-radius: 12px; background: var(--accent); color: #fff; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 13px; font-weight: 800; box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 28%, transparent); transition: filter .2s, transform .2s; }
-.course-card button:hover, .homework-card button:hover { filter: brightness(.95); transform: translateY(-1px); }
+.course-card button { width: 100%; border: 0; border-radius: 12px; background: var(--accent); color: #fff; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 13px; font-weight: 800; box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 28%, transparent); transition: filter .2s, transform .2s; }
+.course-card button:hover { filter: brightness(.95); transform: translateY(-1px); }
 .breadcrumbs { min-height: 58px; display: flex; align-items: center; gap: 9px; color: #9aa5b9; font-size: 12px; overflow-x: auto; white-space: nowrap; }
 .breadcrumbs button { border: 0; background: none; padding: 0; cursor: pointer; color: #697996; }
 .breadcrumbs button:hover { color: var(--navy); }
@@ -52,16 +52,16 @@ button { color: inherit; }
 .intro-mark { color: var(--accent); border: 2px dashed color-mix(in srgb, var(--accent) 45%, white); width: 170px; height: 170px; border-radius: 50%; display: grid; place-items: center; font-size: 56px; font-weight: 800; transform: rotate(-7deg); position: relative; opacity: .75; }
 .intro-mark span { position: absolute; right: -5px; top: 5px; font-size: 35px; }
 .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.module-card, .lesson-card, .material-card { text-align: left; border: 1px solid var(--line); background: #fff; border-radius: 17px; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; }
-.module-card:hover, .lesson-card:hover, .material-card:hover { transform: translateY(-3px); border-color: #cad8ee; box-shadow: 0 14px 35px rgba(33,65,119,.09); }
+.module-card, .lesson-card { text-align: left; border: 1px solid var(--line); background: #fff; border-radius: 17px; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.module-card:hover, .lesson-card:hover { transform: translateY(-3px); border-color: #cad8ee; box-shadow: 0 14px 35px rgba(33,65,119,.09); }
 .module-card { min-height: 116px; padding: 20px; display: grid; grid-template-columns: 62px 1fr 40px; align-items: center; gap: 17px; }
 .module-number { width: 62px; height: 62px; display: grid; place-items: center; background: #eff5ff; border-radius: 17px; color: #4e78bf; font-size: 19px; font-weight: 800; }
 .module-card--starter { border-color: #d7e3f6; background: linear-gradient(110deg, #f7faff, #fff); }
 .module-card--starter .module-number { background: var(--navy); color: #ffd24b; }
-.module-card > span:nth-child(2), .lesson-card > span:nth-child(2), .material-card > span:nth-child(2) { display: flex; flex-direction: column; }
-.module-card small, .lesson-card small, .material-card small { color: #929db0; font-size: 11px; font-style: normal; }
-.module-card strong, .lesson-card strong, .material-card strong { color: var(--navy); font-size: 18px; margin: 3px 0; }
-.module-card i, .lesson-card i, .material-card i { width: 36px; height: 36px; display: grid; place-items: center; background: #f5f7fb; color: #6680ac; border-radius: 50%; font-style: normal; justify-self: end; }
+.module-card > span:nth-child(2), .lesson-card > span:nth-child(2) { display: flex; flex-direction: column; }
+.module-card small, .lesson-card small { color: #929db0; font-size: 11px; font-style: normal; }
+.module-card strong, .lesson-card strong { color: var(--navy); font-size: 18px; margin: 3px 0; }
+.module-card i, .lesson-card i { width: 36px; height: 36px; display: grid; place-items: center; background: #f5f7fb; color: #6680ac; border-radius: 50%; font-style: normal; justify-self: end; }
 .lesson-list { display: grid; gap: 13px; }
 .lesson-card { min-height: 100px; padding: 17px 20px; display: grid; grid-template-columns: 62px 1fr 40px; align-items: center; gap: 18px; }
 .lesson-icon { width: 58px; height: 58px; border-radius: 17px; display: grid; place-items: center; font-size: 19px; font-weight: 800; background: #fff1f2; color: #ff5364; }
@@ -69,16 +69,7 @@ button { color: inherit; }
 .lesson-icon--2 { background: #f2edff; color: #8154e8; }
 .lesson-icon--3 { background: #edf7ff; color: #2b83e6; }
 .lesson-icon--4 { background: #eefaf3; color: #35a66b; }
-.materials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.material-card { min-height: 126px; padding: 22px; display: grid; grid-template-columns: 64px 1fr 38px; align-items: center; gap: 17px; }
-.material-icon { width: 61px; height: 61px; display: grid; place-items: center; border-radius: 17px; color: var(--material); background: color-mix(in srgb, var(--material) 10%, white); font-weight: 800; font-size: 20px; }
-.material-card strong { font-size: 19px; }
-.material-card small { line-height: 1.5; }
-.homework-card { margin-top: 18px; padding: 30px; border-radius: 20px; background: #f0f6ff; display: grid; grid-template-columns: 75px 1fr 190px; align-items: center; gap: 22px; }
-.homework-icon { width: 70px; height: 70px; display: grid; place-items: center; border-radius: 20px; background: #fff; color: #3974d0; font-size: 26px; font-weight: 800; box-shadow: 0 8px 25px rgba(43,91,164,.1); }
-.homework-card h2 { font-size: 25px; }
-.homework-card p { color: #657491; margin: 5px 0 0; font-size: 13px; }
-.homework-card button { --accent: #245fae; }
+.lesson-page { min-height: calc(100vh - 209px); }
 .trainer-section { padding: 58px 8px 0; }
 .trainer-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
 .trainer-heading h2 { color: var(--navy); font-size: 31px; letter-spacing: -1px; margin: 0; }
@@ -120,7 +111,7 @@ footer p { margin-left: auto; color: #96a0b3; font-size: 11px; font-weight: 600;
   .course-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-panel { padding: 45px; }
   .hero-copy h1 { font-size: 46px; }
-  .module-grid, .materials-grid { grid-template-columns: 1fr; }
+  .module-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 620px) {
   .app-shell { width: min(100% - 28px, 1180px); }
@@ -150,12 +141,6 @@ footer p { margin-left: auto; color: #96a0b3; font-size: 11px; font-weight: 600;
   .module-number { width: 52px; height: 52px; }
   .lesson-card { grid-template-columns: 52px 1fr 32px; gap: 13px; padding: 14px; }
   .lesson-icon { width: 52px; height: 52px; }
-  .material-card { grid-template-columns: 52px 1fr 30px; padding: 16px; gap: 13px; }
-  .material-icon { width: 52px; height: 52px; }
-  .material-card strong { font-size: 16px; }
-  .homework-card { grid-template-columns: 58px 1fr; padding: 22px; gap: 15px; }
-  .homework-icon { width: 58px; height: 58px; }
-  .homework-card button { grid-column: 1 / -1; }
   .trainer-section { padding: 44px 0 0; }
   .trainer-heading h2 { font-size: 26px; }
   .trainer-badge { display: none; }

@@ -12,12 +12,6 @@ const courses: Course[] = [
   { id: 'spotlight-7', title: 'Spotlight 7', level: 'Pre-intermediate', modules: 10, tone: '#fff0f3', accent: '#b91543', illustration: 'books' },
 ]
 const lessons = ['Lesson 1', 'Lesson 2', 'Lesson 3', 'Revision', 'Test']
-const materialCards = [
-  { title: 'Vocabulary', text: 'Learn and practise new words', icon: 'Aa', color: '#ff5364' },
-  { title: 'Grammar', text: 'Rules, examples and exercises', icon: '{}', color: '#8154e8' },
-  { title: 'Reading', text: 'Read the text and answer questions', icon: '≡', color: '#f5ac16' },
-  { title: 'Listening', text: 'Listen and complete the tasks', icon: '♫', color: '#2b83e6' },
-]
 const toBeQuestions = [
   { before: 'What ', answer: 'is', after: ' your name?' },
   { before: 'How old ', answer: 'are', after: ' you?' },
@@ -126,7 +120,7 @@ function ToBeTrainer() {
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const hasToBeTrainer = course.id === 'starlight-4' && module === 'Starter' && lesson === 'Lesson 1'
-  return <main className="inner-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{hasToBeTrainer && <ToBeTrainer/>}<section className="content-section"><div className="section-heading"><div><span className="eyebrow">Lesson materials</span><h2>Let's learn</h2></div><p>Open a section to get started</p></div><div className="materials-grid">{materialCards.map(item => <button className="material-card" key={item.title} style={{ '--material': item.color } as React.CSSProperties}><span className="material-icon">{item.icon}</span><span><strong>{item.title}</strong><small>{item.text}</small></span><i><ArrowIcon/></i></button>)}</div><div className="homework-card"><span className="homework-icon">✓</span><div><span className="eyebrow">After the lesson</span><h2>Homework</h2><p>Complete the tasks and practise what you learned today.</p></div><button>Open homework <ArrowIcon/></button></div></section></main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{hasToBeTrainer && <ToBeTrainer/>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
