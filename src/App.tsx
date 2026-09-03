@@ -143,10 +143,23 @@ function EnchantedElvesTrainer() {
   </section>
 }
 
+function PhonicsTrainer() {
+  return <section className="practice-pack">
+    <div className="trainer-heading"><div><span className="eyebrow">Pronunciation practice</span><h2>Listen, Say & Sort</h2></div><span className="trainer-badge">Phonics</span></div>
+    <iframe
+      className="practice-frame practice-frame--phonics"
+      src={`${import.meta.env.BASE_URL}trainers/phonics-speaking-and-sorting.html`}
+      title="English Sounds — Speaking Cards and Sorting"
+      loading="lazy"
+      allow="autoplay"
+    />
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const isStarlightStarter = course.id === 'starlight-4' && module === 'Starter'
-  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <EnchantedElvesTrainer/>}</main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
