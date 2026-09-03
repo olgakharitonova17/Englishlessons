@@ -18,6 +18,20 @@ const materialCards = [
   { title: 'Reading', text: 'Read the text and answer questions', icon: '≡', color: '#f5ac16' },
   { title: 'Listening', text: 'Listen and complete the tasks', icon: '♫', color: '#2b83e6' },
 ]
+const toBeQuestions = [
+  { before: 'What ', answer: 'is', after: ' your name?' },
+  { before: 'How old ', answer: 'are', after: ' you?' },
+  { before: 'Where ', answer: 'are', after: ' you from?' },
+  { before: 'Where ', answer: 'is', after: ' Mark from?' },
+  { before: 'Emma ', answer: 'is', after: ' from Poland.' },
+  { before: 'Maria and Lucas ', answer: 'are', after: ' from Spain.' },
+  { before: 'You ', answer: 'are', after: ' from Russia.' },
+  { before: 'Uncle Fergus ', answer: 'is', after: ' short and fat.' },
+  { before: 'My cousins ', answer: 'are', after: ' slim.' },
+  { before: 'Aunt Mary ', answer: 'is', after: ' beautiful.' },
+  { before: 'I ', answer: 'am', after: ' short and slim.' },
+  { before: "My country's flag ", answer: 'is', after: ' white, blue and red.' },
+]
 
 function BookLogo() {
   return <svg className="book-logo" viewBox="0 0 44 38" aria-hidden="true"><path d="M3 5.5c7-2.2 13.2-.8 18 3.2v25C16.2 30.8 10.2 30 3 32V5.5Z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/><path d="M41 5.5c-7-2.2-13.2-.8-18 3.2v25c4.8-2.9 10.8-3.7 18-1.7V5.5Z" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/><path d="M34 5v11l3-2 3 2V6" fill="#ff4e5b"/></svg>
@@ -50,9 +64,69 @@ function ModulePage({ course, module, setView }: { course: Course; module: Modul
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   return <main className="inner-page"><Breadcrumbs view={{ page: 'module', course, module }} setView={setView}/><PageIntro kicker={course.title} title={moduleTitle} text="Work through the lessons, then check your progress." accent={course.accent}/><section className="content-section"><div className="section-heading"><div><span className="eyebrow">Module content</span><h2>Lessons</h2></div><p>Learn at your own pace</p></div><div className="lesson-list">{lessons.map((lesson, index) => <button className="lesson-card" key={lesson} onClick={() => setView({ page: 'lesson', course, module, lesson })}><span className={`lesson-icon lesson-icon--${index}`} aria-hidden="true">{index < 3 ? index + 1 : index === 3 ? '↻' : '✓'}</span><span><small>{index < 3 ? 'Core lesson' : index === 3 ? 'Review everything' : 'Check your knowledge'}</small><strong>{lesson}</strong></span><i><ArrowIcon/></i></button>)}</div></section></main>
 }
+
+function ToBeTrainer() {
+  const [order, setOrder] = useState(() => [...toBeQuestions].sort(() => Math.random() - 0.5))
+  const [index, setIndex] = useState(0)
+  const [selected, setSelected] = useState<string | null>(null)
+  const [checked, setChecked] = useState(false)
+  const [score, setScore] = useState(0)
+  const [finished, setFinished] = useState(false)
+  const [seconds, setSeconds] = useState(0)
+  const question = order[index]
+
+  useEffect(() => {
+    if (finished) return
+    const timer = window.setInterval(() => setSeconds(value => value + 1), 1000)
+    return () => window.clearInterval(timer)
+  }, [finished])
+
+  const reset = () => {
+    setOrder([...toBeQuestions].sort(() => Math.random() - 0.5))
+    setIndex(0); setSelected(null); setChecked(false); setScore(0); setFinished(false); setSeconds(0)
+  }
+  const check = () => {
+    if (!selected || checked) return
+    setChecked(true)
+    if (selected === question.answer) setScore(value => value + 1)
+  }
+  const next = () => {
+    if (!checked) return
+    if (index === order.length - 1) { setFinished(true); return }
+    setIndex(value => value + 1); setSelected(null); setChecked(false)
+  }
+  const back = () => {
+    if (index === 0) return
+    setIndex(value => value - 1); setSelected(null); setChecked(false)
+  }
+  const listen = () => {
+    if (!('speechSynthesis' in window)) return
+    window.speechSynthesis.cancel()
+    const voice = new SpeechSynthesisUtterance(question.before + question.answer + question.after)
+    voice.lang = 'en-GB'; voice.rate = 0.88
+    window.speechSynthesis.speak(voice)
+  }
+  const time = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
+
+  return <section className="trainer-section">
+    <div className="trainer-heading"><div><span className="eyebrow">Interactive practice</span><h2>The verb “to be”</h2></div><span className="trainer-badge">12 questions</span></div>
+    <div className="trainer-card">
+      {finished ? <div className="trainer-result"><span>🎉</span><h3>Well done!</h3><strong>{score} / {order.length} correct</strong><p>Time: {time}</p><button onClick={reset}>Try again</button></div> : <>
+        <div className="trainer-top"><strong>Question {index + 1} of {order.length}</strong><span>{time}</span></div>
+        <div className="trainer-progress"><span style={{ width: `${((index + 1) / order.length) * 100}%` }}/></div>
+        <div className="trainer-question"><p>{question.before}<span>{checked && selected === question.answer ? question.answer : '___'}</span>{question.after}</p><button onClick={listen} disabled={!checked || selected !== question.answer}>🔊 Listen</button></div>
+        <div className="trainer-answers">{['am', 'is', 'are'].map(answer => <button key={answer} disabled={checked} className={`${selected === answer ? 'selected' : ''} ${checked && answer === question.answer ? 'correct' : ''} ${checked && selected === answer && answer !== question.answer ? 'wrong' : ''}`} onClick={() => setSelected(answer)}>{answer}</button>)}</div>
+        <p className={`trainer-feedback ${checked ? selected === question.answer ? 'good' : 'bad' : ''}`}>{checked ? selected === question.answer ? 'Correct! ✓' : `Not quite. The correct answer is “${question.answer}”.` : ''}</p>
+        <div className="trainer-controls"><button onClick={back} disabled={index === 0}>← Back</button><button className="check" onClick={check} disabled={!selected || checked}>Check</button><button className="next" onClick={next} disabled={!checked}>{index === order.length - 1 ? 'Result →' : 'Next →'}</button></div>
+      </>}
+    </div>
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
-  return <main className="inner-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/><section className="content-section"><div className="section-heading"><div><span className="eyebrow">Lesson materials</span><h2>Let's learn</h2></div><p>Open a section to get started</p></div><div className="materials-grid">{materialCards.map(item => <button className="material-card" key={item.title} style={{ '--material': item.color } as React.CSSProperties}><span className="material-icon">{item.icon}</span><span><strong>{item.title}</strong><small>{item.text}</small></span><i><ArrowIcon/></i></button>)}</div><div className="homework-card"><span className="homework-icon">✓</span><div><span className="eyebrow">After the lesson</span><h2>Homework</h2><p>Complete the tasks and practise what you learned today.</p></div><button>Open homework <ArrowIcon/></button></div></section></main>
+  const hasToBeTrainer = course.id === 'starlight-4' && module === 'Starter' && lesson === 'Lesson 1'
+  return <main className="inner-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{hasToBeTrainer && <ToBeTrainer/>}<section className="content-section"><div className="section-heading"><div><span className="eyebrow">Lesson materials</span><h2>Let's learn</h2></div><p>Open a section to get started</p></div><div className="materials-grid">{materialCards.map(item => <button className="material-card" key={item.title} style={{ '--material': item.color } as React.CSSProperties}><span className="material-icon">{item.icon}</span><span><strong>{item.title}</strong><small>{item.text}</small></span><i><ArrowIcon/></i></button>)}</div><div className="homework-card"><span className="homework-icon">✓</span><div><span className="eyebrow">After the lesson</span><h2>Homework</h2><p>Complete the tasks and practise what you learned today.</p></div><button>Open homework <ArrowIcon/></button></div></section></main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
