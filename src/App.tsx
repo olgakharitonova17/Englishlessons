@@ -156,10 +156,23 @@ function PhonicsTrainer() {
   </section>
 }
 
+function LikesAndAppearanceTrainer() {
+  return <section className="practice-pack">
+    <div className="trainer-heading"><div><span className="eyebrow">Likes &amp; appearance practice</span><h2>Enchanted Elves</h2></div><span className="trainer-badge">2 exercises</span></div>
+    <iframe
+      className="practice-frame practice-frame--elves"
+      src={`${import.meta.env.BASE_URL}trainers/enchanted-elves-likes-and-appearance.html`}
+      title="Enchanted Elves — Likes and Appearance"
+      loading="lazy"
+      allow="autoplay"
+    />
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const isStarlightStarter = course.id === 'starlight-4' && module === 'Starter'
-  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}</main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}{isStarlightStarter && lesson === 'Lesson 3' && <LikesAndAppearanceTrainer/>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
