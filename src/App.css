@@ -61,7 +61,6 @@ button { color: inherit; }
 .module-card > span:nth-child(2), .lesson-card > span:nth-child(2), .material-card > span:nth-child(2) { display: flex; flex-direction: column; }
 .module-card small, .lesson-card small, .material-card small { color: #929db0; font-size: 11px; font-style: normal; }
 .module-card strong, .lesson-card strong, .material-card strong { color: var(--navy); font-size: 18px; margin: 3px 0; }
-.module-card em { color: #6c7b96; font-size: 11px; font-style: normal; }
 .module-card i, .lesson-card i, .material-card i { width: 36px; height: 36px; display: grid; place-items: center; background: #f5f7fb; color: #6680ac; border-radius: 50%; font-style: normal; justify-self: end; }
 .lesson-list { display: grid; gap: 13px; }
 .lesson-card { min-height: 100px; padding: 17px 20px; display: grid; grid-template-columns: 62px 1fr 40px; align-items: center; gap: 18px; }
