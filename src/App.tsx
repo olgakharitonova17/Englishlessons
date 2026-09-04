@@ -177,10 +177,16 @@ function LikesAndAppearancePosters() {
   </section>
 }
 
+function ToBeOrHaveGotPoster() {
+  return <section className="lesson-poster" aria-label="To be or have got examples">
+    <img src={`${import.meta.env.BASE_URL}trainers/lesson-2-to-be-or-have-got.png`} alt="Examples showing when to use to be and have got"/>
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const isStarlightStarter = course.id === 'starlight-4' && module === 'Starter'
-  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}{isStarlightStarter && lesson === 'Lesson 3' && <><LikesAndAppearancePosters/><LikesAndAppearanceTrainer/></>}</main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><ToBeOrHaveGotPoster/><EnchantedElvesTrainer/><PhonicsTrainer/></>}{isStarlightStarter && lesson === 'Lesson 3' && <><LikesAndAppearancePosters/><LikesAndAppearanceTrainer/></>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
