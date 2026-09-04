@@ -169,10 +169,18 @@ function LikesAndAppearanceTrainer() {
   </section>
 }
 
+function LikesAndAppearancePosters() {
+  const baseUrl = import.meta.env.BASE_URL
+  return <section className="lesson-posters" aria-label="Likes and appearance examples">
+    <img src={`${baseUrl}trainers/lesson-3-she-likes-and-appearance.png`} alt="Examples of what she likes and what she looks like"/>
+    <img src={`${baseUrl}trainers/lesson-3-he-likes-and-appearance.png`} alt="Examples of what he likes and what he looks like"/>
+  </section>
+}
+
 function LessonPage({ course, module, lesson, setView }: { course: Course; module: ModuleId; lesson: string; setView: (view: View) => void }) {
   const moduleTitle = module === 'Starter' ? 'Starter' : `Module ${module}`
   const isStarlightStarter = course.id === 'starlight-4' && module === 'Starter'
-  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}{isStarlightStarter && lesson === 'Lesson 3' && <LikesAndAppearanceTrainer/>}</main>
+  return <main className="inner-page lesson-page"><Breadcrumbs view={{ page: 'lesson', course, module, lesson }} setView={setView}/><PageIntro kicker={`${course.title} · ${moduleTitle}`} title={lesson} text="Everything you need for today's English lesson." accent={course.accent}/>{isStarlightStarter && lesson === 'Lesson 1' && <><ToBeTrainer/><EnglishPracticePack/></>}{isStarlightStarter && lesson === 'Lesson 2' && <><EnchantedElvesTrainer/><PhonicsTrainer/></>}{isStarlightStarter && lesson === 'Lesson 3' && <><LikesAndAppearancePosters/><LikesAndAppearanceTrainer/></>}</main>
 }
 function App() {
   const [view, setView] = useState<View>({ page: 'home' })
